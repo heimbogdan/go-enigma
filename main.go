@@ -9,8 +9,8 @@ import (
 
 func main() {
 	start := time.Now()
-	cipher.SetScramble(cipher.ALPHA_NUMERIC_SYMBOLS, 11, 25, 3, 10)
-	encMessage := cipher.Encode("In acest \"jurnal de bord\" nu o sa scriu numai despre consum. O sa scriu si despre alte opinii personale pe masura ce ma voi putea pronunta in acest sens. Nu pot spune ceva legat de cum se aseaza la drum sau cum \"trage\". Am condus-o doar in Bucuresti pana in prezent. Are doar 238 km la bord in acest moment.")
+	cipher.SetScramble(cipher.ALPHA_NUMERIC_SYMBOLS, 11, 25, 3, 3)
+	encMessage := cipher.Encode("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.")
 	fmt.Println(encMessage)
 	fmt.Println(cipher.Decode(encMessage))
 	end := time.Now()
