@@ -2,6 +2,8 @@
 
 No main / executable function yet!
 
+This can be used as a library now, by importing `github.com/heimbogdan/go-enigma/cipher`
+
 ## Usage
 
 ```go

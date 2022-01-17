@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/heimbogdan/go-enigma/internal/cipher"
+	"github.com/heimbogdan/go-enigma/cipher"
 )
 
 func main() {
