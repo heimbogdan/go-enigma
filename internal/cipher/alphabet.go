@@ -37,10 +37,7 @@ const (
 
 // f 10
 func SetScramble(aType AlphabetType, first int, second int, third int, counter int) {
-	_first = first
-	_second = second
-	_third = third
-	_counter = counter
+	_first, _second, _third, _counter = first, second, third, counter
 	_aType = aType
 	switch aType {
 	case ALPHA:
@@ -54,55 +51,37 @@ func SetScramble(aType AlphabetType, first int, second int, third int, counter i
 	}
 }
 
-func scramble1(num int) {
-	resetCipher1()
+func scrambleCipher(cipher baseAlphabet, num int) {
 	for i := 1; i <= _aSize; i++ {
 		index := (((num % i) + num + i - 1) % _aSize) + 1
-		for cipher1.decodeMap[index] != 0 {
+		for cipher.decodeMap[index] != 0 {
 			index = (index % _aSize) + 1
 		}
-		cipher1.encodeMap[i] = index
-		cipher1.decodeMap[index] = i
+		cipher.encodeMap[i] = index
+		cipher.decodeMap[index] = i
 		num = index
 	}
+}
+
+func scramble1(num int) {
+	cipher1 = baseAlphabet{encodeMap: make(map[int]int), decodeMap: make(map[int]int)}
+	scrambleCipher(cipher1, num)
 }
 
 func scramble2(num int) {
-	resetCipher2()
-	for i := 1; i <= _aSize; i++ {
-		index := (((num % i) + num + i - 1) % _aSize) + 1
-		for cipher2.decodeMap[index] != 0 {
-			index = (index % _aSize) + 1
-		}
-		cipher2.encodeMap[i] = index
-		cipher2.decodeMap[index] = i
-		num = index
-	}
+	cipher2 = baseAlphabet{encodeMap: make(map[int]int), decodeMap: make(map[int]int)}
+	scrambleCipher(cipher2, num)
 }
 
 func scramble3(num int) {
-	resetCipher3()
-	for i := 1; i <= _aSize; i++ {
-		index := (((num % i) + num + i - 1) % _aSize) + 1
-		for cipher3.decodeMap[index] != 0 {
-			index = (index % _aSize) + 1
-		}
-		cipher3.encodeMap[i] = index
-		cipher3.decodeMap[index] = i
-		num = index
-	}
-}
-
-func resetCipher1() {
-	cipher1 = baseAlphabet{encodeMap: make(map[int]int), decodeMap: make(map[int]int)}
-}
-
-func resetCipher2() {
-	cipher2 = baseAlphabet{encodeMap: make(map[int]int), decodeMap: make(map[int]int)}
-}
-
-func resetCipher3() {
 	cipher3 = baseAlphabet{encodeMap: make(map[int]int), decodeMap: make(map[int]int)}
+	scrambleCipher(cipher3, num)
+}
+
+func scrampleAll(a, b, c int) {
+	scramble1(a)
+	scramble2(b)
+	scramble3(c)
 }
 
 func PrintCipher() {
@@ -136,16 +115,11 @@ func getAlphabet(aType AlphabetType) string {
 }
 
 func Encode(message string) string {
-	scramble1(_first)
-	scramble2(_second)
-	scramble3(_third)
+	scrampleAll(_first, _second, _third)
 	encMessage := make([]rune, len(message))
 	alphabet := getAlphabet(_aType)
 	alphabetRunes := []rune(alphabet)
-	counter := int(0)
-	c1 := int(0)
-	c2 := int(0)
-	c3 := int(0)
+	counter, c1, c2, c3 := int(0), int(0), int(0), int(0)
 	for i, ch := range message {
 		index := strings.IndexRune(alphabet, ch)
 		if index < 0 {
@@ -180,16 +154,11 @@ func Encode(message string) string {
 }
 
 func Decode(message string) string {
-	scramble1(_first)
-	scramble2(_second)
-	scramble3(_third)
+	scrampleAll(_first, _second, _third)
 	decMessage := make([]rune, len(message))
 	alphabet := getAlphabet(_aType)
 	alphabetRunes := []rune(alphabet)
-	counter := int(0)
-	c1 := int(0)
-	c2 := int(0)
-	c3 := int(0)
+	counter, c1, c2, c3 := int(0), int(0), int(0), int(0)
 	for i, ch := range message {
 		index := strings.IndexRune(alphabet, ch)
 		if index < 0 {
