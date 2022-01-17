@@ -14,7 +14,15 @@ MESSAGE             - Message to be ecoded / decoded
 This can be used as a library now, by importing `github.com/heimbogdan/go-enigma/cipher`
 ```
 
-## Usage
+```bash
+go run main.go encode 3 10 14 27 6 "hello world"
+$BI~6oRJ`Iu
+
+go run main.go decode 3 10 14 27 6 '$BI~6oRJ`Iu'
+hello world
+```
+
+## Usage as library
 
 ```go
 //Used to set the alphabet that will be used, the cipher (three integers) and the counter used to update and change the cipher.
